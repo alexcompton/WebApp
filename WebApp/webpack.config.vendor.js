@@ -27,7 +27,7 @@ module.exports = {
             'angular2-universal',
             'angular2-universal-polyfills',
             'bootstrap',
-            'bootstrap/dist/css/bootstrap.css',
+            'bootswatch/cyborg/bootstrap.min.css',
             'es6-shim',
             'es6-promise',
             'jquery',
