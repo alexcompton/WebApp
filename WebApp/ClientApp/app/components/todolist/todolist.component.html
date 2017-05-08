@@ -1,0 +1,27 @@
+<h1>Todo List</h1>
+
+<p>This component demonstrates reading and writing data from an Azure DocumentDB.</p>
+
+<br/>
+
+<p *ngIf="!items"><em>Loading...</em></p>
+
+<table class='table' *ngIf="items">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Completed</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items">
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>
+                <span *ngIf="item.completed" class='glyphicon glyphicon-ok'></span>
+                <span *ngIf="!item.completed" class='glyphicon glyphicon-remove'></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using WebApp.Repo.DocumentDB;
+using WebApp.Models;
 
 namespace WebApp
 {
@@ -62,6 +64,9 @@ namespace WebApp
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            //TODO: move this to a mock IOC container
+            DocumentDBRepository<Item>.Initialize();
         }
     }
 }
