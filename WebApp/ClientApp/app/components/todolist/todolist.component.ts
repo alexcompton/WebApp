@@ -9,7 +9,7 @@ export class TodoListComponent {
     public items: Item[];
 
     constructor(http: Http) {
-        http.get('/api/Item/Items').subscribe(result => {
+        http.get('/api/Item').subscribe(result => {
             this.items = result.json();
         });
     }
