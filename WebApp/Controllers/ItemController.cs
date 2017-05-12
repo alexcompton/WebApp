@@ -17,78 +17,29 @@ namespace WebApp.Controllers
             return await DocumentDBRepository<Item>.GetItemsAsync(d => !d.Completed);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task CreateAsync(Item item)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await DocumentDBRepository<Item>.CreateItemAsync(item);
-        //    }
-        //}
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
+        }
 
-        //[HttpPost]
-        //[ActionName("Edit")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> EditAsync([Bind("Id,Name,Description,Completed")] Item item)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await DocumentDBRepository<Item>.UpdateItemAsync(item.Id, item);
-        //        return RedirectToAction("Index");
-        //    }
+        // POST api/values
+        [HttpPost]
+        public void Post([FromBody]string value)
+        {
+        }
 
-        //    return View(item);
-        //}
+        // PUT api/values/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody]string value)
+        {
+        }
 
-        //[ActionName("Edit")]
-        //public async Task<ActionResult> EditAsync(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    Item item = await DocumentDBRepository<Item>.GetItemAsync(id);
-        //    if (item == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(item);
-        //}
-
-        //[ActionName("Delete")]
-        //public async Task<ActionResult> DeleteAsync(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    Item item = await DocumentDBRepository<Item>.GetItemAsync(id);
-        //    if (item == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(item);
-        //}
-
-        //[HttpPost]
-        //[ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> DeleteConfirmedAsync([Bind("Id")] string id)
-        //{
-        //    await DocumentDBRepository<Item>.DeleteItemAsync(id);
-        //    return RedirectToAction("Index");
-        //}
-
-        //[HttpGet]
-        //[ActionName("Details")]
-        //public async Task<Item> DetailsAsync(string id)
-        //{
-        //    return await DocumentDBRepository<Item>.GetItemAsync(id);
-        //}
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
     }
 }
