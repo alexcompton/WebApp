@@ -33,3 +33,12 @@ interface Item {
     description: string;
     completed: boolean;
 }
+
+export class NewItem {
+    constructor(
+        public name: string,
+        public description: string,
+        public completed?: boolean,
+        public id?: string
+    ) { }
+}
