@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApp.Dao
+namespace WebApp.Core.Service.Dto
 {
-    public class CustomerAddressDao
+    public class CustomerAddressDto
     {
         public Int32 CustomerID { get; set; }
         public Int32 AddressID { get; set; }

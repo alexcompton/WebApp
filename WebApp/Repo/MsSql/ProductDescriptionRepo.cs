@@ -9,9 +9,9 @@ using WebApp.Core.Data.Dao;
 
 namespace WebApp.Repo.MsSql
 {
-    public class ProductRepo : BaseRepo<ProductDao>
+    public class ProductDescriptionRepo : BaseRepo<ProductDescriptionDao>
     {
-        public ProductRepo() : base("[SalesLT].[Product]", "ProductID") { }
+        public ProductDescriptionRepo() : base("[SalesLT].[ProductDescription]", "ProductDescriptionID") { }
 
     }
 }

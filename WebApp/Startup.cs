@@ -11,6 +11,9 @@ using Microsoft.Extensions.Logging;
 using WebApp.Repo.DocumentDB;
 using WebApp.Models;
 using Swashbuckle.AspNetCore.Swagger;
+using WebApp.Core.Data;
+using WebApp.Repo.MsSql;
+using WebApp.Core.Data.Dao;
 
 namespace WebApp
 {
@@ -31,6 +34,18 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add Repos
+            services.Add(new ServiceDescriptor(typeof(IRepo<AddressDao>), p => new AddressRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<CustomerAddressDao>), p => new CustomerAddressRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<CustomerDao>), p => new CustomerRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<ProductCategoryDao>), p => new ProductCategoryRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<ProductDescriptionDao>), p => new ProductDescriptionRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<ProductModelProductDescriptionDoa>), p => new ProductModelProductDescriptionRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<ProductModelDao>), p => new ProductModelRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<ProductDao>), p => new ProductRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<SalesOrderDetailDao>), p => new SalesOrderDetailRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<SalesOrderHeaderDao>), p => new SalesOrderHeaderRepo(), ServiceLifetime.Transient));
+
             // Add framework services.
             services.AddMvc();
 

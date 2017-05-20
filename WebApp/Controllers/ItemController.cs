@@ -17,29 +17,28 @@ namespace WebApp.Controllers
             return await DocumentDBRepository<Item>.GetItemsAsync(d => !d.Completed);
         }
 
-        //// GET api/values/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "not implemented yet";
+        }
+        
+        [HttpPost]
+        public string Post([FromForm]Item item)
+        {
+            return "not implemented yet";
+        }
+        
+        [HttpPut]
+        public string Put([FromForm]Item item)
+        {
+            return "not implemented yet";
+        }
 
-        //// POST api/values
-        //[HttpPost]
-        //public void Post([FromBody]string value)
-        //{
-        //}
-
-        //// PUT api/values/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
-
-        //// DELETE api/values/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        [HttpDelete("{id}")]
+        public string Delete(int id)
+        {
+            return "not implemented yet";
+        }
     }
 }

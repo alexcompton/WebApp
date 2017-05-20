@@ -9,35 +9,35 @@ using WebApp.Core.Data;
 namespace WebApp.Controllers
 {
     [Route("api/[controller]")]
-    public class ProductController : Controller
+    public class AddressController : Controller
     {
-        private readonly IRepo<ProductDao> repo;
+        private readonly IRepo<AddressDao> repo;
 
-        public ProductController(IRepo<ProductDao> repo)
+        public AddressController(IRepo<AddressDao> repo)
         {
             this.repo = repo;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ProductDao>> GetAll()
+        public async Task<IEnumerable<AddressDao>> GetAll()
         {
             return await repo.GetAll();
         }
 
         [HttpGet("{id}")]
-        public async Task<ProductDao> Get(int id)
+        public async Task<AddressDao> Get(int id)
         {
             return await repo.GetByID(id);
         }
 
         [HttpPost]
-        public async Task Add([FromForm]ProductDao product)
+        public async Task Add([FromForm]AddressDao product)
         {
             await repo.Add(product);
         }
 
         [HttpPut]
-        public async Task Update([FromForm]ProductDao product)
+        public async Task Update([FromForm]AddressDao product)
         {
             await repo.Update(product);
         }
