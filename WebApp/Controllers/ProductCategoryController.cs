@@ -5,47 +5,48 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Dto;
 using WebApp.Core.Data;
+using WebApp.Core.Service;
 
 namespace WebApp.Controllers
 {
     [Route("api/[controller]")]
     public class ProductCategoryController : Controller
     {
-        private readonly IRepo<ProductCategoryDto> repo;
+        private readonly ICrudService<ProductCategoryDto> service;
 
-        public ProductCategoryController(IRepo<ProductCategoryDto> repo)
+        public ProductCategoryController(ICrudService<ProductCategoryDto> service)
         {
-            this.repo = repo;
+            this.service = service;
         }
 
         [HttpGet]
         public async Task<IEnumerable<ProductCategoryDto>> GetAll()
         {
-            return await repo.GetAll();
+            return await service.GetAll();
         }
 
         [HttpGet("{id}")]
         public async Task<ProductCategoryDto> Get(int id)
         {
-            return await repo.GetByID(id);
+            return await service.GetByID(id);
         }
 
         [HttpPost]
         public async Task Add([FromForm]ProductCategoryDto product)
         {
-            await repo.Add(product);
+            await service.Add(product);
         }
 
         [HttpPut]
         public async Task Update([FromForm]ProductCategoryDto product)
         {
-            await repo.Update(product);
+            await service.Update(product);
         }
         
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-            await repo.Delete(id);
+            await service.Delete(id);
         }
     }
 }

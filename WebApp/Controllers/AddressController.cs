@@ -4,48 +4,48 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Dto;
-using WebApp.Core.Data;
+using WebApp.Core.Service;
 
 namespace WebApp.Controllers
 {
     [Route("api/[controller]")]
     public class AddressController : Controller
     {
-        private readonly IRepo<AddressDto> repo;
+        private readonly ICrudService<AddressDto> service;
 
-        public AddressController(IRepo<AddressDto> repo)
+        public AddressController(ICrudService<AddressDto> service)
         {
-            this.repo = repo;
+            this.service = service;
         }
 
         [HttpGet]
         public async Task<IEnumerable<AddressDto>> GetAll()
         {
-            return await repo.GetAll();
+            return await service.GetAll();
         }
 
         [HttpGet("{id}")]
         public async Task<AddressDto> Get(int id)
         {
-            return await repo.GetByID(id);
+            return await service.GetByID(id);
         }
 
         [HttpPost]
         public async Task Add([FromForm]AddressDto product)
         {
-            await repo.Add(product);
+            await service.Add(product);
         }
 
         [HttpPut]
         public async Task Update([FromForm]AddressDto product)
         {
-            await repo.Update(product);
+            await service.Update(product);
         }
         
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-            await repo.Delete(id);
+            await service.Delete(id);
         }
     }
 }

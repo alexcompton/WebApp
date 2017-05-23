@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApp.Core.Data
+namespace WebApp.Core.Service
 {
-    public interface IRepo<T>
+    public interface ICrudService<T>
     {
         Task Add(T t);
         Task<IEnumerable<T>> GetAll();

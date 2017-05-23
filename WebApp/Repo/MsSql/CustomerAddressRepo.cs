@@ -9,7 +9,7 @@ using WebApp.Dto;
 
 namespace WebApp.Repo.MsSql
 {
-    public class CustomerAddressRepo : BaseRepo<CustomerAddressDto>
+    public class CustomerAddressRepo : BaseCrudRepo<CustomerAddressDto>
     {
         public CustomerAddressRepo() : base("[SalesLT].[CustomerAddress]", "CustomerID") { }
 

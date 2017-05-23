@@ -9,12 +9,12 @@ using WebApp.Core.Data;
 
 namespace WebApp.Repo.MsSql
 {
-    public abstract class BaseRepo<T> : IRepo<T>
+    public abstract class BaseCrudRepo<T> : ICrudRepo<T>
     {
         private string crudTableName;
         private string primaryKey;
 
-        public BaseRepo(string crudTableName, string primaryKey)
+        public BaseCrudRepo(string crudTableName, string primaryKey)
         {
             this.crudTableName = crudTableName;
             this.primaryKey = primaryKey;
