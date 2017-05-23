@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebApp.Core.Data.Dao;
+using WebApp.Dto;
 using WebApp.Core.Data;
 
 namespace WebApp.Controllers
@@ -11,33 +11,33 @@ namespace WebApp.Controllers
     [Route("api/[controller]")]
     public class ProductCategoryController : Controller
     {
-        private readonly IRepo<ProductCategoryDao> repo;
+        private readonly IRepo<ProductCategoryDto> repo;
 
-        public ProductCategoryController(IRepo<ProductCategoryDao> repo)
+        public ProductCategoryController(IRepo<ProductCategoryDto> repo)
         {
             this.repo = repo;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ProductCategoryDao>> GetAll()
+        public async Task<IEnumerable<ProductCategoryDto>> GetAll()
         {
             return await repo.GetAll();
         }
 
         [HttpGet("{id}")]
-        public async Task<ProductCategoryDao> Get(int id)
+        public async Task<ProductCategoryDto> Get(int id)
         {
             return await repo.GetByID(id);
         }
 
         [HttpPost]
-        public async Task Add([FromForm]ProductCategoryDao product)
+        public async Task Add([FromForm]ProductCategoryDto product)
         {
             await repo.Add(product);
         }
 
         [HttpPut]
-        public async Task Update([FromForm]ProductCategoryDao product)
+        public async Task Update([FromForm]ProductCategoryDto product)
         {
             await repo.Update(product);
         }

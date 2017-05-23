@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApp.Core.Data.Dao
+namespace WebApp.Dto
 {
-    public class SalesOrderDetailDao
+    public class SalesOrderDetailDto
     {
         public Int32 SalesOrderID { get; set; }
         public Int32 SalesOrderDetailID { get; set; }

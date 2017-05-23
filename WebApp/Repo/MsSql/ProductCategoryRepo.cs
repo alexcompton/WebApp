@@ -5,11 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Core.Data;
-using WebApp.Core.Data.Dao;
+using WebApp.Dto;
 
 namespace WebApp.Repo.MsSql
 {
-    public class ProductCategoryRepo : BaseRepo<ProductCategoryDao>
+    public class ProductCategoryRepo : BaseRepo<ProductCategoryDto>
     {
         public ProductCategoryRepo() : base("[SalesLT].[ProductCategory]", "ProductCategoryID") { }
 

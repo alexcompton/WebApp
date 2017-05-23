@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApp.Core.Service.Dto
+namespace WebApp.Models
 {
-    public class ProductModelDto
+    public class ProductModelProductDescription
     {
         public Int32 ProductModelID { get; set; }
-        public String Name { get; set; }
-        public String CatalogDescription { get; set; }
+        public Int32 ProductDescriptionID { get; set; }
+        public String Culture { get; set; }
         public Guid rowguid { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApp.Core.Data.Dao
+namespace WebApp.Models
 {
-    public class ProductDescriptionDao
+    public class ProductModel
     {
-        public Int32 ProductDescriptionID { get; set; }
-        public String Description { get; set; }
+        public Int32 ProductModelID { get; set; }
+        public String Name { get; set; }
+        public String CatalogDescription { get; set; }
         public Guid rowguid { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

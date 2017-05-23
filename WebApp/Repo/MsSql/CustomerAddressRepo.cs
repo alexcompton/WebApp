@@ -5,11 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Core.Data;
-using WebApp.Core.Data.Dao;
+using WebApp.Dto;
 
 namespace WebApp.Repo.MsSql
 {
-    public class CustomerAddressRepo : BaseRepo<CustomerAddressDao>
+    public class CustomerAddressRepo : BaseRepo<CustomerAddressDto>
     {
         public CustomerAddressRepo() : base("[SalesLT].[CustomerAddress]", "CustomerID") { }
 

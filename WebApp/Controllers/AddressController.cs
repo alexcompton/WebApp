@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebApp.Core.Data.Dao;
+using WebApp.Dto;
 using WebApp.Core.Data;
 
 namespace WebApp.Controllers
@@ -11,33 +11,33 @@ namespace WebApp.Controllers
     [Route("api/[controller]")]
     public class AddressController : Controller
     {
-        private readonly IRepo<AddressDao> repo;
+        private readonly IRepo<AddressDto> repo;
 
-        public AddressController(IRepo<AddressDao> repo)
+        public AddressController(IRepo<AddressDto> repo)
         {
             this.repo = repo;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<AddressDao>> GetAll()
+        public async Task<IEnumerable<AddressDto>> GetAll()
         {
             return await repo.GetAll();
         }
 
         [HttpGet("{id}")]
-        public async Task<AddressDao> Get(int id)
+        public async Task<AddressDto> Get(int id)
         {
             return await repo.GetByID(id);
         }
 
         [HttpPost]
-        public async Task Add([FromForm]AddressDao product)
+        public async Task Add([FromForm]AddressDto product)
         {
             await repo.Add(product);
         }
 
         [HttpPut]
-        public async Task Update([FromForm]AddressDao product)
+        public async Task Update([FromForm]AddressDto product)
         {
             await repo.Update(product);
         }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApp.Core.Data.Dao
+namespace WebApp.Models
 {
-    public class CustomerDao
+    public class Customer
     {
         public Int32 CustomerID { get; set; }
         public Boolean NameStyle { get; set; }

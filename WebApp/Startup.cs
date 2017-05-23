@@ -13,7 +13,7 @@ using WebApp.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApp.Core.Data;
 using WebApp.Repo.MsSql;
-using WebApp.Core.Data.Dao;
+using WebApp.Dto;
 
 namespace WebApp
 {
@@ -35,16 +35,16 @@ namespace WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Repos
-            services.Add(new ServiceDescriptor(typeof(IRepo<AddressDao>), p => new AddressRepo(), ServiceLifetime.Transient));
-            services.Add(new ServiceDescriptor(typeof(IRepo<CustomerAddressDao>), p => new CustomerAddressRepo(), ServiceLifetime.Transient));
-            services.Add(new ServiceDescriptor(typeof(IRepo<CustomerDao>), p => new CustomerRepo(), ServiceLifetime.Transient));
-            services.Add(new ServiceDescriptor(typeof(IRepo<ProductCategoryDao>), p => new ProductCategoryRepo(), ServiceLifetime.Transient));
-            services.Add(new ServiceDescriptor(typeof(IRepo<ProductDescriptionDao>), p => new ProductDescriptionRepo(), ServiceLifetime.Transient));
-            services.Add(new ServiceDescriptor(typeof(IRepo<ProductModelProductDescriptionDoa>), p => new ProductModelProductDescriptionRepo(), ServiceLifetime.Transient));
-            services.Add(new ServiceDescriptor(typeof(IRepo<ProductModelDao>), p => new ProductModelRepo(), ServiceLifetime.Transient));
-            services.Add(new ServiceDescriptor(typeof(IRepo<ProductDao>), p => new ProductRepo(), ServiceLifetime.Transient));
-            services.Add(new ServiceDescriptor(typeof(IRepo<SalesOrderDetailDao>), p => new SalesOrderDetailRepo(), ServiceLifetime.Transient));
-            services.Add(new ServiceDescriptor(typeof(IRepo<SalesOrderHeaderDao>), p => new SalesOrderHeaderRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<AddressDto>), p => new AddressRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<CustomerAddressDto>), p => new CustomerAddressRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<CustomerDto>), p => new CustomerRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<ProductCategoryDto>), p => new ProductCategoryRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<ProductDescriptionDto>), p => new ProductDescriptionRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<ProductModelProductDescriptionDto>), p => new ProductModelProductDescriptionRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<ProductModelDto>), p => new ProductModelRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<ProductDto>), p => new ProductRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<SalesOrderDetailDto>), p => new SalesOrderDetailRepo(), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IRepo<SalesOrderHeaderDto>), p => new SalesOrderHeaderRepo(), ServiceLifetime.Transient));
 
             // Add framework services.
             services.AddMvc();
