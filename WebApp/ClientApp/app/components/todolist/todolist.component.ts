@@ -9,7 +9,7 @@ import { Http } from '@angular/http';
 export class TodoListComponent {
     public items: Item[];
     public http: Http;
-    public activeItem: Item;
+    public activeTask: Item;
 
     constructor(http: Http) {
         this.http = http;
@@ -18,12 +18,19 @@ export class TodoListComponent {
 
     getTable(): void {
         this.http.get('/api/Item').subscribe(result => {
-             this.items = result.json();
+            let items = result.json();
+            console.log('items', items);
+            this.items = items;
         });
     };
 
-    btnDetails(item: Item): void {
-        this.activeItem = item;
+    viewDetails(item: Item): void {
+        this.activeTask = item;
+    }
+
+    updateTask(item: Item): void {
+        let message = JSON.stringify(item);
+        alert('update item logic:\n' + message);
     }
 }
 
@@ -31,14 +38,14 @@ interface Item {
     id: string;
     name: string;
     description: string;
-    completed: boolean;
+    isComplete: boolean;
 }
 
 export class NewItem {
     constructor(
         public name: string,
         public description: string,
-        public completed?: boolean,
+        public isComplete: boolean,
         public id?: string
     ) { }
 }

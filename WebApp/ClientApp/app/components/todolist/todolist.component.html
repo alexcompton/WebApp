@@ -2,7 +2,7 @@
 <h1>Todo List</h1>
 
 <p>This component demonstrates reading and writing data from an Azure DocumentDB.</p>
-<br/>
+<br />
 
 <div *ngIf="!items">
     <br />
@@ -10,7 +10,7 @@
 </div>
 
 
-<button *ngIf="items" data-toggle="modal" data-target=".new-item-modal" class="btn btn-primary btn-sm">New Item</button>
+<button *ngIf="items" data-toggle="modal" data-target=".new-task-modal" class="btn btn-primary">New Item</button>
 
 
 <br />
@@ -27,71 +27,109 @@
         <tr *ngFor="let item of items">
             <td>{{ item.name }}</td>
             <td>{{ item.description }}</td>
-            <td>
-                <p class="text-success" *ngIf="item.completed">
+            <td>                
+                <p class="text-success" *ngIf="item.isComplete">
                     <span class='glyphicon glyphicon-ok'></span>
                 </p>
-                <p class="text-danger" *ngIf="!item.completed">
+                <p class="text-danger" *ngIf="!item.isComplete">
                     <span class='glyphicon glyphicon-remove'></span>
                 </p>
             </td>
             <td>
-                <button class="btn btn-default btn-sm" data-toggle="modal" data-target=".item-modal" (click)="btnDetails(item)">Details</button>
+                <button class="btn btn-default" data-toggle="modal" data-target=".view-task-modal" (click)="viewDetails(item)">Details</button>
             </td>
         </tr>
     </tbody>
 </table>
 
 <!-- New Item Modal -->
-<div *ngIf="activeItem" class="modal fade new-item-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h5 class="modal-title" id="exampleModalLabel">{{ activeItem.name }}</h5>
-      </div>
-      <div class="modal-body">
-        <p>{{ activeItem.description }}</p>
-        <p>{{ activeItem.description }}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-success" data-dismiss="modal">Ok</button>
-        <button type="button" class="btn btn-sm btn-primary">Save changes</button>
-      </div>
+<div *ngIf="activeTask" class="modal fade new-task-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">{{ activeTask.name }}</h5>
+            </div>
+            <div class="modal-body">
+                <p>{{ activeTask.description }}</p>
+                <p>{{ activeTask.isComplete && 'Completed' || 'Not Completed' }}</p>
+                <br />
+                <small class="pull-right">Item ID: {{ activeTask.id }}</small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-<!-- Details Modal -->
-<div *ngIf="activeItem" class="modal fade item-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h5 class="modal-title" id="exampleModalLabel">Item Name: {{ activeItem.name }}</h5>
-      </div>
-      <div class="modal-body">
-        <dl>
-            <dt>Description:</dt>
-            <dd>{{ activeItem.description }}</dd>
-        </dl>
-        <dl>
-            <!--this would probably be better in a pipe-->
-            <dt>Item Completed:</dt>
-            <dd *ngIf="activeItem.completed">Completed</dd>
-            <dd *ngIf="!activeItem.completed">Not Completed</dd>
-        </dl>
-        <br/>
-        <small class="pull-right">Item ID: {{ activeItem.id }}</small>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-success" data-dismiss="modal">Ok</button>
-        <button type="button" class="btn btn-sm btn-primary">Save changes</button>
-      </div>
+<!-- View Details Modal -->
+<div *ngIf="activeTask" class="modal fade view-task-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Item Name: {{ activeTask.name }}</h5>
+            </div>
+            <div class="modal-body">
+                <dl>
+                    <dt>Description:</dt>
+                    <dd>{{ activeTask.description }}</dd>
+                </dl>
+                <dl>
+                    <!--this would probably be better in a pipe-->
+                    <dt>Item Completed:</dt>
+                    <dd>{{ activeTask.isComplete && 'Completed' || 'Not Completed' }}</dd>
+                </dl>
+                <br />
+                <small class="pull-right">Item ID: {{ activeTask.id }}</small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target=".edit-task-modal">Edit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+
+<!-- Edit Details Modal -->
+<div *ngIf="activeTask" class="modal fade edit-task-modal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Edit Task</h5>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Task Name</label>
+                        <input type="text" class="form-control" id="name" value="{{ activeTask.name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Task Description</label>
+                        <textarea class="form-control" id="description" rows="5" required>{{ activeTask.description }}</textarea>
+                    </div>
+                    
+                    <div class="checkbox">
+                        <label><input type="checkbox" [checked]="activeTask.isComplete">Is Completed</label>
+                    </div>
+                    
+                    <br />
+                    <small class="pull-right">Item ID: {{ activeTask.id }}</small>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateTask(activeTask)">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

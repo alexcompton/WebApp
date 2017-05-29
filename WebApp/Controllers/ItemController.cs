@@ -14,7 +14,7 @@ namespace WebApp.Controllers
         [HttpGet]
         public async Task<IEnumerable<Item>> GetAll()
         {
-            return await DocumentDBRepository<Item>.GetItemsAsync(d => !d.Completed);
+            return await DocumentDBRepository<Item>.GetItemsAsync(i => true);
         }
 
         [HttpGet("{id}")]
@@ -30,9 +30,11 @@ namespace WebApp.Controllers
         }
         
         [HttpPut]
-        public string Put([FromForm]Item item)
+        public async Task Put([FromForm]Item item)
         {
-            return "not implemented yet";
+            var doc = await DocumentDBRepository<Item>.UpdateItemAsync(item.Id, item);
+            // for debbuging purposes
+            return;
         }
 
         [HttpDelete("{id}")]
