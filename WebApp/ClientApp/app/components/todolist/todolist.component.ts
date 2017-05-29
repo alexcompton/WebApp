@@ -19,7 +19,6 @@ export class TodoListComponent {
     getTable(): void {
         this.http.get('/api/Item').subscribe(result => {
             let items = result.json();
-            console.log('items', items);
             this.items = items;
         });
     };
