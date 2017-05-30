@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -28,7 +29,8 @@ import { TodoListComponent } from './components/todolist/todolist.component';
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'todolist', component: TodoListComponent },
             { path: '**', redirectTo: 'home' }
-        ])
+        ]),
+        FormsModule
     ]
 })
 export class AppModule {

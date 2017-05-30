@@ -32,13 +32,13 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task Add([FromForm]SalesOrderHeaderDto product)
+        public async Task Add([FromBody]SalesOrderHeaderDto product)
         {
             await service.Add(product);
         }
 
         [HttpPut]
-        public async Task Update([FromForm]SalesOrderHeaderDto product)
+        public async Task Update([FromBody]SalesOrderHeaderDto product)
         {
             await service.Update(product);
         }

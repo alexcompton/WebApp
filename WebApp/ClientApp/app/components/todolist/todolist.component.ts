@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'todolist',
@@ -27,9 +28,38 @@ export class TodoListComponent {
         this.activeTask = item;
     }
 
-    updateTask(item: Item): void {
-        let message = JSON.stringify(item);
-        alert('update item logic:\n' + message);
+    updateTask(): void {
+        this.http.put('/api/Item', this.activeTask).subscribe(result => {
+            // todo: add error handling
+        });
+    }
+
+    insertTask(): void {
+        this.http.post('/api/Item', this.activeTask).subscribe(result => {
+            this.items.push(this.activeTask);
+        });
+    }
+
+    newTask(): void {
+        this.activeTask = new Task();
+        this.activeTask.id = this.generateUUID();
+        this.activeTask.isComplete = false;
+    }
+
+    // todo: generate guid in c#
+    generateUUID (): string {
+
+        var d = new Date().getTime();
+        
+        if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
+            d += performance.now(); //use high-precision timer if available
+        }
+        
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = (d + Math.random() * 16) % 16 | 0;
+            d = Math.floor(d / 16);
+            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
     }
 }
 
@@ -40,11 +70,9 @@ interface Item {
     isComplete: boolean;
 }
 
-export class NewItem {
-    constructor(
-        public name: string,
-        public description: string,
-        public isComplete: boolean,
-        public id?: string
-    ) { }
+export class Task implements Item{
+    id: string;
+    name: string;
+    description: string;
+    isComplete: boolean;
 }
