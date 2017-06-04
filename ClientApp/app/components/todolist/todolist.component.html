@@ -1,0 +1,84 @@
+
+<h1>Todo List</h1>
+
+<p>This component demonstrates reading and writing data from an Azure DocumentDB.</p>
+<br />
+
+<div *ngIf="!items">
+    <br />
+    <p><em>Loading...</em></p>
+</div>
+
+<div *ngIf="items && !activeTask" >
+    <button class="btn btn-primary" (click)="newTask()">New Item</button>
+    <br />
+    <br/>
+</div>
+
+
+<!-- Item Editor -->
+<div *ngIf="activeTask" class="jumbotron">
+    
+    <!--editor title-->
+    <h3 class="text-center">{{ activeTitle }}</h3>
+    <hr class="featurette-divider">
+
+    <!--editor body-->
+        <form>
+            <div class="form-group">
+                <label for="name">Task Name</label>
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="activeTask.name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Task Description</label>
+                <textarea class="form-control" id="description" rows="5" name="description" [(ngModel)]="activeTask.description" required></textarea>
+            </div>
+
+            <div class="checkbox">
+                <label><input type="checkbox" [(ngModel)]="activeTask.isComplete" name="isComplete" required>Is Completed</label>
+            </div>
+
+            <br />
+            <small class="pull-right">Item ID: {{ activeTask.id }}</small>
+        </form>
+
+    <hr class="featurette-divider">
+
+    <!--editor footer-->
+    <div class="pull-left">
+        <button type="submit" class="btn btn-primary" (click)="makeRequest()">{{requestCommand}}</button>
+    </div>
+    <div class="pull-right">
+        <button *ngIf="requestType === 2" type="button" class="btn btn-danger" (click)="deleteTask()">Delete</button>
+        <button type="button" class="btn btn-default" (click)="closeActiveItem()">Close</button>
+    </div>
+    <br />
+</div>
+
+<table class='table table-bordered table-striped table-condensed' *ngIf="items">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Completed</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items">
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>
+                <p class="text-success" *ngIf="item.isComplete">
+                    <span class='glyphicon glyphicon-ok'></span>
+                </p>
+                <p class="text-danger" *ngIf="!item.isComplete">
+                    <span class='glyphicon glyphicon-remove'></span>
+                </p>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-default" (click)="viewTask(item)">Details</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
