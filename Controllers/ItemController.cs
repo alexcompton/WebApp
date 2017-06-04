@@ -37,9 +37,9 @@ namespace WebApp.Controllers
         }
 
         [HttpDelete("{id}")]
-        public string Delete(int id)
+        public async Task Delete(string id)
         {
-            return "not implemented yet";
+            await DocumentDBRepository<Item>.DeleteItemAsync(id);
         }
     }
 }
