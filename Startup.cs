@@ -39,11 +39,13 @@ namespace WebApp
             services.AddTransient<ICrudRepo<AddressDto>, AddressRepo>();
             services.AddTransient<ICrudRepo<CustomerAddressDto>, CustomerAddressRepo>();
             services.AddTransient<ICrudRepo<CustomerDto>, CustomerRepo>();
+            services.AddTransient<ICrudRepo<EmployeeDto>, EmployeeRepo>();
             services.AddTransient<ICrudRepo<ProductCategoryDto>, ProductCategoryRepo>();
             services.AddTransient<ICrudRepo<ProductDescriptionDto>, ProductDescriptionRepo>();
             services.AddTransient<ICrudRepo<ProductModelProductDescriptionDto>, ProductModelProductDescriptionRepo>();
             services.AddTransient<ICrudRepo<ProductModelDto>, ProductModelRepo>();
             services.AddTransient<ICrudRepo<ProductDto>, ProductRepo>();
+            services.AddTransient<ISalesAddressRepo<SalesAddressDto>, SalesAddressRepo>();
             services.AddTransient<ICrudRepo<SalesOrderDetailDto>, SalesOrderDetailRepo>();
             services.AddTransient<ICrudRepo<SalesOrderHeaderDto>, SalesOrderHeaderRepo>();
 
@@ -51,11 +53,13 @@ namespace WebApp
             services.AddTransient<ICrudService<AddressDto>, AddressService>();
             services.AddTransient<ICrudService<CustomerAddressDto>, CustomerAddressService>();
             services.AddTransient<ICrudService<CustomerDto>, CustomerService>();
+            services.AddTransient<ICrudService<EmployeeDto>, EmployeeService>();
             services.AddTransient<ICrudService<ProductCategoryDto>, ProductCategoryService>();
             services.AddTransient<ICrudService<ProductDescriptionDto>, ProductDescriptionService>();
             services.AddTransient<ICrudService<ProductModelProductDescriptionDto>, ProductModelProductDescriptionService>();
             services.AddTransient<ICrudService<ProductModelDto>, ProductModelService>();
             services.AddTransient<ICrudService<ProductDto>, ProductService>();
+            services.AddTransient<ISalesAddressService<SalesAddressDto>, SalesAddressService>();
             services.AddTransient<ICrudService<SalesOrderDetailDto>, SalesOrderDetailService>();
             services.AddTransient<ICrudService<SalesOrderHeaderDto>, SalesOrderHeaderService>();
 
