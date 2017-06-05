@@ -35,14 +35,28 @@ export class TodoListComponent {
 
     updateRequest(): void {
         this.http.put(this.origninUrl + '/api/Item', this.activeTask).subscribe(result => {
+            this.refreshPage();
             // todo: add error handling
         });
     }
 
     createRequest(): void {
         this.http.post(this.origninUrl + '/api/Item', this.activeTask).subscribe(result => {
-            this.items.push(this.activeTask);
+            this.refreshPage();
         });
+    }
+
+    deleteRequest(): void {
+        this.http.delete(this.origninUrl + '/api/Item/' + this.activeTask.id).subscribe(result => {
+            // todo: add error handling
+            this.refreshPage();
+        });
+    }
+
+    refreshPage(): void {
+        this.closeActiveItem();
+        this.items = null;
+        this.getTable();
     }
 
     makeRequest(): void {
@@ -57,13 +71,13 @@ export class TodoListComponent {
                 this.updateRequest();
                 break;
             case Request.Delete:
-                // add this feature
+                this.deleteRequest();
                 break;
             default:
                 console.log("this shouldn't ever happen");
         }
 
-        this.closeActiveItem();
+        //this.refreshPage();
     }
 
     newTask(): void {
