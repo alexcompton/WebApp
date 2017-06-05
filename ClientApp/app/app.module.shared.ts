@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { TodoListComponent } from './components/todolist/todolist.component';
+import { ProductsComponent } from './components/products/products';
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -17,7 +18,8 @@ export const sharedConfig: NgModule = {
         CounterComponent,
         FetchDataComponent,
         TodoListComponent,
-        HomeComponent
+        HomeComponent,
+        ProductsComponent
     ],
     imports: [
         FormsModule,
@@ -26,6 +28,7 @@ export const sharedConfig: NgModule = {
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'products', component: ProductsComponent },
             { path: 'todolist', component: TodoListComponent },
             { path: '**', redirectTo: 'home' }
         ])
