@@ -12,9 +12,9 @@ namespace WebApp.Controllers
     [Route("api/[controller]")]
     public class ProductModelController : Controller
     {
-        private readonly ICrudService<ProductModelDto> service;
+        private readonly IProductModelService service;
 
-        public ProductModelController(ICrudService<ProductModelDto> service)
+        public ProductModelController(IProductModelService service)
         {
             this.service = service;
         }

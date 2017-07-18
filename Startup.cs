@@ -36,32 +36,33 @@ namespace WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ICrudRepo<AddressDto>, AddressRepo>();
-            services.AddTransient<ICrudRepo<CustomerAddressDto>, CustomerAddressRepo>();
-            services.AddTransient<ICrudRepo<CustomerDto>, CustomerRepo>();
-            services.AddTransient<ICrudRepo<EmployeeDto>, EmployeeRepo>();
-            services.AddTransient<ICrudRepo<ProductCategoryDto>, ProductCategoryRepo>();
-            services.AddTransient<ICrudRepo<ProductDescriptionDto>, ProductDescriptionRepo>();
-            services.AddTransient<ICrudRepo<ProductModelProductDescriptionDto>, ProductModelProductDescriptionRepo>();
-            services.AddTransient<ICrudRepo<ProductModelDto>, ProductModelRepo>();
-            services.AddTransient<ICrudRepo<ProductDto>, ProductRepo>();
-            services.AddTransient<ISalesAddressRepo<SalesAddressDto>, SalesAddressRepo>();
-            services.AddTransient<ICrudRepo<SalesOrderDetailDto>, SalesOrderDetailRepo>();
-            services.AddTransient<ICrudRepo<SalesOrderHeaderDto>, SalesOrderHeaderRepo>();
+            // add repos
+            services.AddTransient<IAddressRepo, AddressRepo>();
+            services.AddTransient<ICustomerAddressRepo, CustomerAddressRepo>();
+            services.AddTransient<ICustomerRepo, CustomerRepo>();
+            services.AddTransient<IEmployeeRepo, EmployeeRepo>();
+            services.AddTransient<IProductCategoryRepo, ProductCategoryRepo>();
+            services.AddTransient<IProductDescriptionRepo, ProductDescriptionRepo>();
+            services.AddTransient<IProductModelProductDescriptionRepo, ProductModelProductDescriptionRepo>();
+            services.AddTransient<IProductModelRepo, ProductModelRepo>();
+            services.AddTransient<IProductRepo, ProductRepo>();
+            services.AddTransient<ISalesAddressRepo, SalesAddressRepo>();
+            services.AddTransient<ISalesOrderDetailRepo, SalesOrderDetailRepo>();
+            services.AddTransient<ISalesOrderHeaderRepo, SalesOrderHeaderRepo>();
 
             // Add services
-            services.AddTransient<ICrudService<AddressDto>, AddressService>();
-            services.AddTransient<ICrudService<CustomerAddressDto>, CustomerAddressService>();
-            services.AddTransient<ICrudService<CustomerDto>, CustomerService>();
-            services.AddTransient<ICrudService<EmployeeDto>, EmployeeService>();
-            services.AddTransient<ICrudService<ProductCategoryDto>, ProductCategoryService>();
-            services.AddTransient<ICrudService<ProductDescriptionDto>, ProductDescriptionService>();
-            services.AddTransient<ICrudService<ProductModelProductDescriptionDto>, ProductModelProductDescriptionService>();
-            services.AddTransient<ICrudService<ProductModelDto>, ProductModelService>();
-            services.AddTransient<ICrudService<ProductDto>, ProductService>();
-            services.AddTransient<ISalesAddressService<SalesAddressDto>, SalesAddressService>();
-            services.AddTransient<ICrudService<SalesOrderDetailDto>, SalesOrderDetailService>();
-            services.AddTransient<ICrudService<SalesOrderHeaderDto>, SalesOrderHeaderService>();
+            services.AddTransient<IAddressService, AddressService>();
+            services.AddTransient<ICustomerAddressService, CustomerAddressService>();
+            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddTransient<IProductCategoryService, ProductCategoryService>();
+            services.AddTransient<IProductDescriptionService, ProductDescriptionService>();
+            services.AddTransient<IProductModelProductDescriptionService, ProductModelProductDescriptionService>();
+            services.AddTransient<IProductModelService, ProductModelService>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ISalesAddressService, SalesAddressService>();
+            services.AddTransient<ISalesOrderDetailService, SalesOrderDetailService>();
+            services.AddTransient<ISalesOrderHeaderService, SalesOrderHeaderService>();
 
             // Add framework services.
             services.AddMvc();

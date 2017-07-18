@@ -6,8 +6,7 @@ using WebApp.Dto;
 
 namespace WebApp.Core.Service
 {
-    public interface ISalesAddressService : ICrudService<SalesAddressDto>
+    public interface IProductService : ICrudService<ProductDto>
     {
-        Task<IEnumerable<SalesAddressDto>> GetByEmployeeID(int id);
     }
 }

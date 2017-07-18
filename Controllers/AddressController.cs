@@ -11,9 +11,9 @@ namespace WebApp.Controllers
     [Route("api/[controller]")]
     public class AddressController : Controller
     {
-        private readonly ICrudService<AddressDto> service;
+        private readonly IAddressService service;
 
-        public AddressController(ICrudService<AddressDto> service)
+        public AddressController(IAddressService service)
         {
             this.service = service;
         }

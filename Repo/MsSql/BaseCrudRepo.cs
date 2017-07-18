@@ -9,17 +9,8 @@ using WebApp.Core.Data;
 
 namespace WebApp.Repo.MsSql
 {
-    public abstract class BaseCrudRepo<T> : ICrudRepo<T>
+    public abstract class BaseRepo
     {
-        private string crudTableName;
-        private string primaryKey;
-
-        public BaseCrudRepo(string crudTableName, string primaryKey)
-        {
-            this.crudTableName = crudTableName;
-            this.primaryKey = primaryKey;
-        }
-
         public IDbConnection Connection
         {
             get
@@ -27,10 +18,13 @@ namespace WebApp.Repo.MsSql
                 return new SqlConnection(@"Server=acompton11.database.windows.net;Database=AdventureWorks;User Id=user;Password=P@ssword;");
             }            
         }
-
+/*
         public virtual async Task Add(T t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+
+            }
         }
 
         public virtual async Task<IEnumerable<T>> GetAll()
@@ -70,5 +64,6 @@ namespace WebApp.Repo.MsSql
         {
             throw new NotImplementedException();
         }
+        */
     }
 }

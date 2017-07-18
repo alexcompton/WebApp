@@ -9,9 +9,49 @@ using WebApp.Dto;
 
 namespace WebApp.Repo.MsSql
 {
-    public class ProductCategoryRepo : BaseCrudRepo<ProductCategoryDto>
+    public class ProductCategoryRepo : BaseRepo, IProductCategoryRepo
     {
-        public ProductCategoryRepo() : base("[SalesLT].[ProductCategory]", "ProductCategoryID") { }
+        public async Task Add(ProductCategoryDto t)
+        {
+            throw new NotImplementedException();
+        }
 
+        public async Task Delete(int id)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"DELETE FROM [SalesLT].[ProductCategory]
+                            WHERE ProductCategoryID = @Id";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query, new { Id = id });
+            }
+        }
+
+        public async Task<IEnumerable<ProductCategoryDto>> GetAll()
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = "SELECT * FROM [SalesLT].[ProductCategory]";
+                dbConnection.Open();
+                return await dbConnection.QueryAsync<ProductCategoryDto>(query);
+            }
+        }
+
+        public async Task<ProductCategoryDto> GetByID(int id)
+        {
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"SELECT * FROM [SalesLT].[ProductCategory]
+                            WHERE ProductCategoryID = @Id";
+                dbConnection.Open();
+                var list = await dbConnection.QueryAsync<ProductCategoryDto>(query, new { Id = id });
+                return list.FirstOrDefault();
+            }
+        }
+
+        public async Task Update(ProductCategoryDto t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

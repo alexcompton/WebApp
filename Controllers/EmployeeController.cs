@@ -11,9 +11,9 @@ namespace WebApp.Controllers
     [Route("api/[controller]")]
     public class EmployeeController : Controller
     {
-        private readonly ICrudService<EmployeeDto> service;
+        private readonly IEmployeeService service;
 
-        public EmployeeController(ICrudService<EmployeeDto> service)
+        public EmployeeController(IEmployeeService service)
         {
             this.service = service;
         }

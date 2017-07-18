@@ -11,9 +11,9 @@ namespace WebApp.Controllers
     [Route("api/[controller]")]
     public class SalesAddressController : Controller
     {
-        private readonly ISalesAddressService<SalesAddressDto> service;
+        private readonly ISalesAddressService service;
 
-        public SalesAddressController(ISalesAddressService<SalesAddressDto> service)
+        public SalesAddressController(ISalesAddressService service)
         {
             this.service = service;
         }
@@ -21,7 +21,7 @@ namespace WebApp.Controllers
         [HttpGet("{id}")]
         public async Task<IEnumerable<SalesAddressDto>> Get(int id)
         {
-            return await service.GetByID(id);
+            return await service.GetByEmployeeID(id);
         }
     }
 }
