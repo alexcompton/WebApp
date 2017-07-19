@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Dto;
@@ -31,15 +30,15 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task Add([FromBody]EmployeeDto product)
+        public async Task Add([FromBody]EmployeeDto employeeDto)
         {
-            await service.Add(product);
+            await service.Add(employeeDto);
         }
 
         [HttpPut]
-        public async Task Update([FromBody]EmployeeDto product)
+        public async Task Update([FromBody]EmployeeDto employeeDto)
         {
-            await service.Update(product);
+            await service.Update(employeeDto);
         }
         
         [HttpDelete("{id}")]

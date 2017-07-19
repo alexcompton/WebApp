@@ -13,7 +13,32 @@ namespace WebApp.Repo.MsSql
     {
         public async Task Add(ProductDescriptionDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"INSERT INTO [SalesLT].[ProductDescription] 
+                            (
+                                ProductDescriptionID, 
+                                Description, 
+                                rowguid, 
+                                ModifiedDate 
+                            ) 
+                            VALUES 
+                            (
+                                @ProductDescriptionID, 
+                                @Description, 
+                                @rowguid, 
+                                @ModifiedDate 
+                            );";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query,
+                    new
+                    {
+                        ProductDescriptionID = t.ProductDescriptionID,
+                        Description = t.Description,
+                        rowguid = t.rowguid,
+                        ModifiedDate = t.ModifiedDate
+                    });
+            }
         }
 
         public async Task Delete(int id)
@@ -51,7 +76,23 @@ namespace WebApp.Repo.MsSql
 
         public async Task Update(ProductDescriptionDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"UPDATE [SalesLT].[ProductDescription]
+                            SET 
+                                Description = @Description,
+                                rowguid = @rowguid,
+                                ModifiedDate = @ModifiedDate
+                            WHERE ProductDescriptionID = @ProductDescriptionID;";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query, new
+                {
+                        ProductDescriptionID = t.ProductDescriptionID,
+                        Description = t.Description,
+                        rowguid = t.rowguid,
+                        ModifiedDate = t.ModifiedDate
+                });
+            }
         }
     }
 }

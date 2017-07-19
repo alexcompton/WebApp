@@ -13,7 +13,35 @@ namespace WebApp.Repo.MsSql
     {
         public async Task Add(ProductModelProductDescriptionDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"INSERT INTO [SalesLT].[ProductModelProductDescription] 
+                            (
+                                ProductModelID,
+                                ProductDescriptionID,
+                                Culture,
+                                rowguid,
+                                ModifiedDate
+                            ) 
+                            VALUES 
+                            (
+                                @ProductModelID,
+                                @ProductDescriptionID,
+                                @Culture,
+                                @rowguid,
+                                @ModifiedDate
+                            );";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query,
+                    new
+                    {
+                        ProductModelID = t.ProductModelID,
+                        ProductDescriptionID = t.ProductDescriptionID,
+                        Culture = t.Culture,
+                        rowguid = t.rowguid,
+                        ModifiedDate = t.ModifiedDate
+                    });
+            }
         }
 
         public async Task Delete(int id)
@@ -51,7 +79,25 @@ namespace WebApp.Repo.MsSql
 
         public async Task Update(ProductModelProductDescriptionDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"UPDATE [SalesLT].[ProductModelProductDescription]
+                            SET 
+                                ProductDescriptionID = @ProductDescriptionID,
+                                Culture = @Culture,
+                                rowguid = @rowguid,
+                                ModifiedDate = @ModifiedDate
+                            WHERE ProductModelID = @ProductModelID;";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query, new
+                {
+                        ProductModelID = t.ProductModelID,
+                        ProductDescriptionID = t.ProductDescriptionID,
+                        Culture = t.Culture,
+                        rowguid = t.rowguid,
+                        ModifiedDate = t.ModifiedDate
+                });
+            }
         }
     }
 }

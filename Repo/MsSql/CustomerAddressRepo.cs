@@ -13,7 +13,35 @@ namespace WebApp.Repo.MsSql
     {
         public async Task Add(CustomerAddressDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"INSERT INTO [SalesLT].[CustomerAddress] 
+                            (
+                                CustomerID, 
+                                AddressID, 
+                                AddressType, 
+                                rowguid, 
+                                ModifiedDate
+                            ) 
+                            VALUES 
+                            (
+                                @CustomerID, 
+                                @AddressID, 
+                                @AddressType, 
+                                @rowguid, 
+                                @ModifiedDate
+                            );";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query,
+                    new
+                    {
+                        CustomerID = t.CustomerID,
+                        AddressID = t.AddressID,
+                        AddressType = t.AddressType,
+                        rowguid = t.rowguid,
+                        ModifiedDate = t.ModifiedDate
+                    });
+            }
         }
 
         public async Task Delete(int id)
@@ -51,7 +79,25 @@ namespace WebApp.Repo.MsSql
 
         public async Task Update(CustomerAddressDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"UPDATE [SalesLT].[CustomerAddress]
+                            SET 
+                                AddressID = @AddressID,
+                                AddressType = @AddressType,
+                                rowguid = @rowguid,
+                                ModifiedDate = @ModifiedDate
+                            WHERE CustomerID = @CustomerID;";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query, new
+                {
+                    CustomerID = t.CustomerID,
+                    AddressID = t.AddressID,
+                    AddressType = t.AddressType,
+                    rowguid = t.rowguid,
+                    ModifiedDate = t.ModifiedDate
+                });
+            }
         }
     }
 }

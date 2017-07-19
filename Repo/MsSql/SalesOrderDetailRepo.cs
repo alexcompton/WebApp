@@ -13,7 +13,47 @@ namespace WebApp.Repo.MsSql
     {
         public async Task Add(SalesOrderDetailDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"INSERT INTO [SalesLT].[SalesOrderDetail] 
+                            (
+                                SalesOrderID,
+                                SalesOrderDetailID,
+                                OrderQty,
+                                ProductID,
+                                UnitPrice,
+                                UnitPriceDiscount,
+                                LineTotal,
+                                rowguid,
+                                ModifiedDate
+                            ) 
+                            VALUES 
+                            (
+                                @SalesOrderID,
+                                @SalesOrderDetailID,
+                                @OrderQty,
+                                @ProductID,
+                                @UnitPrice,
+                                @UnitPriceDiscount,
+                                @LineTotal,
+                                @rowguid,
+                                @ModifiedDate
+                            );";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query,
+                    new
+                    {
+                        SalesOrderID = t.SalesOrderID,
+                        SalesOrderDetailID = t.SalesOrderDetailID,
+                        OrderQty = t.OrderQty,
+                        ProductID = t.ProductID,
+                        UnitPrice = t.UnitPrice,
+                        UnitPriceDiscount = t.UnitPriceDiscount,
+                        LineTotal = t.LineTotal,
+                        rowguid = t.rowguid,
+                        ModifiedDate = t.ModifiedDate
+                    });
+            }
         }
 
         public async Task Delete(int id)
@@ -51,7 +91,33 @@ namespace WebApp.Repo.MsSql
 
         public async Task Update(SalesOrderDetailDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"UPDATE [SalesLT].[SalesOrderDetail]
+                            SET 
+                                SalesOrderDetailID = @SalesOrderDetailID,
+                                OrderQty = @OrderQty,
+                                ProductID = @ProductID,
+                                UnitPrice = @UnitPrice,
+                                UnitPriceDiscount = @UnitPriceDiscount,
+                                LineTotal = @LineTotal,
+                                rowguid = @rowguid,
+                                ModifiedDate = @ModifiedDate
+                            WHERE SalesOrderID = @SalesOrderID;";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query, new
+                {
+                        SalesOrderID = t.SalesOrderID,
+                        SalesOrderDetailID = t.SalesOrderDetailID,
+                        OrderQty = t.OrderQty,
+                        ProductID = t.ProductID,
+                        UnitPrice = t.UnitPrice,
+                        UnitPriceDiscount = t.UnitPriceDiscount,
+                        LineTotal = t.LineTotal,
+                        rowguid = t.rowguid,
+                        ModifiedDate = t.ModifiedDate
+                });
+            }
         }
     }
 }

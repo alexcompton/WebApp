@@ -13,7 +13,35 @@ namespace WebApp.Repo.MsSql
     {
         public async Task Add(ProductModelDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"INSERT INTO [SalesLT].[ProductModel] 
+                            (
+                                ProductModelID,
+                                Name,
+                                CatalogDescription,
+                                rowguid,
+                                ModifiedDate
+                            ) 
+                            VALUES 
+                            (
+                                @ProductModelID,
+                                @Name,
+                                @CatalogDescription,
+                                @rowguid,
+                                @ModifiedDate
+                            );";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query,
+                    new
+                    {
+                        ProductModelID = t.ProductModelID,
+                        Name = t.Name,
+                        CatalogDescription = t.CatalogDescription,
+                        rowguid = t.rowguid,
+                        ModifiedDate = t.ModifiedDate
+                    });
+            }
         }
 
         public async Task Delete(int id)
@@ -51,7 +79,25 @@ namespace WebApp.Repo.MsSql
 
         public async Task Update(ProductModelDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"UPDATE [SalesLT].[ProductModel]
+                            SET 
+                                Name = @Name,
+                                CatalogDescription = @CatalogDescription,
+                                rowguid = @rowguid,
+                                ModifiedDate = @ModifiedDate
+                            WHERE ProductModelID = @ProductModelID;";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query, new
+                {
+                        ProductModelID = t.ProductModelID,
+                        Name = t.Name,
+                        CatalogDescription = t.CatalogDescription,
+                        rowguid = t.rowguid,
+                        ModifiedDate = t.ModifiedDate
+                });
+            }
         }
     }
 }

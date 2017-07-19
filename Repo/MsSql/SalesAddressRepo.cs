@@ -13,7 +13,38 @@ namespace WebApp.Repo.MsSql
     {
         public async Task Add(SalesAddressDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"INSERT INTO [SalesLT].[SalesAddress] 
+                            (
+                                CustomerName,
+                                CompanyName,
+                                Phone,
+                                EmailAddress,
+                                AddressType,
+                                Address
+                            ) 
+                            VALUES 
+                            (
+                                @CustomerName,
+                                @CompanyName,
+                                @Phone,
+                                @EmailAddress,
+                                @AddressType,
+                                @Address
+                            );";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query,
+                    new
+                    {
+                        CustomerName = t.CustomerName,
+                        CompanyName = t.CompanyName,
+                        Phone = t.Phone,
+                        EmailAddress = t.EmailAddress,
+                        AddressType = t.AddressType,
+                        Address = t.Address
+                    });
+            }
         }
 
         public async Task Delete(int id)
@@ -62,7 +93,27 @@ namespace WebApp.Repo.MsSql
 
         public async Task Update(SalesAddressDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"UPDATE [SalesLT].[SalesAddress]
+                            SET 
+                                CompanyName = @CompanyName,
+                                Phone = @Phone,
+                                EmailAddress = @EmailAddress,
+                                AddressType = @AddressType,
+                                Address = @Address
+                            WHERE CustomerName = @CustomerName;";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query, new
+                {
+                        CustomerName = t.CustomerName,
+                        CompanyName = t.CompanyName,
+                        Phone = t.Phone,
+                        EmailAddress = t.EmailAddress,
+                        AddressType = t.AddressType,
+                        Address = t.Address
+                });
+            }
         }
     }
 }

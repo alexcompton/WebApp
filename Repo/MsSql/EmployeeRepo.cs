@@ -13,7 +13,38 @@ namespace WebApp.Repo.MsSql
     {
         public async Task Add(EmployeeDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"INSERT INTO [SalesLT].[Employee] 
+                            (
+                                EmployeeTypeId, 
+                                JobTitle, 
+                                FirstName, 
+                                LastName, 
+                                Email, 
+                                DomainName 
+                            ) 
+                            VALUES 
+                            (
+                                @EmployeeTypeId, 
+                                @JobTitle, 
+                                @FirstName, 
+                                @LastName, 
+                                @Email, 
+                                @DomainName 
+                            );";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query,
+                    new
+                    {
+                        EmployeeTypeId = t.EmployeeTypeId,
+                        JobTitle = t.JobTitle,
+                        FirstName = t.FirstName,
+                        LastName = t.LastName,
+                        Email = t.Email,
+                        DomainName = t.DomainName
+                    });
+            }
         }
 
         public async Task Delete(int id)
@@ -51,7 +82,29 @@ namespace WebApp.Repo.MsSql
 
         public async Task Update(EmployeeDto t)
         {
-            throw new NotImplementedException();
+            using (IDbConnection dbConnection = Connection)
+            {
+                var query = @"UPDATE [SalesLT].[Employee]
+                            SET
+                                EmployeeTypeId = @EmployeeTypeId,
+                                JobTitle = @JobTitle,
+                                FirstName = @FirstName,
+                                LastName = @LastName,
+                                Email = @Email,
+                                DomainName = @DomainName
+                            WHERE EmployeeId = @EmployeeId;";
+                dbConnection.Open();
+                await dbConnection.ExecuteAsync(query, new
+                {
+                        EmployeeId = t.EmployeeId,
+                        EmployeeTypeId = t.EmployeeTypeId,
+                        JobTitle = t.JobTitle,
+                        FirstName = t.FirstName,
+                        LastName = t.LastName,
+                        Email = t.Email,
+                        DomainName = t.DomainName
+                });
+            }
         }
     }
 }

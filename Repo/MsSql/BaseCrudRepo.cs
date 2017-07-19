@@ -18,52 +18,5 @@ namespace WebApp.Repo.MsSql
                 return new SqlConnection(@"Server=acompton11.database.windows.net;Database=AdventureWorks;User Id=user;Password=P@ssword;");
             }            
         }
-/*
-        public virtual async Task Add(T t)
-        {
-            using (IDbConnection dbConnection = Connection)
-            {
-
-            }
-        }
-
-        public virtual async Task<IEnumerable<T>> GetAll()
-        {
-            using (IDbConnection dbConnection = Connection)
-            {
-                var query = "SELECT * FROM " + crudTableName;
-                dbConnection.Open();
-                return await dbConnection.QueryAsync<T>(query);
-            }
-        }
-
-        public virtual async Task<T> GetByID(int id)
-        {
-            using (IDbConnection dbConnection = Connection)
-            {
-                var query = "SELECT * FROM " + crudTableName + 
-                    " Where " + primaryKey + " = @Id";
-                dbConnection.Open();
-                var list = await dbConnection.QueryAsync<T>(query, new { Id = id });
-                return list.FirstOrDefault();
-            }
-        }
-
-        public virtual async Task Delete(int id)
-        {
-            using (IDbConnection dbConnection = Connection)
-            {
-                var query = "DELETE FROM " + crudTableName +
-                    " Where " + primaryKey + " = @Id";
-                dbConnection.Open();
-                await dbConnection.ExecuteAsync(query, new { Id = id });
-            }
-        }
-
-        public virtual async Task Update(T t)
-        {
-            throw new NotImplementedException();
-        }
-        */
     }
 }
