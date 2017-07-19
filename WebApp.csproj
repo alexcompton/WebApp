@@ -22,6 +22,7 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
+    <None Remove="Properties\PublishProfiles\WebApp20170718085254 - Web Deploy.pubxml" />
     <None Remove="Properties\PublishProfiles\WebApp88 - Web Deploy.pubxml" />
     <None Remove="yarn.lock" />
 
@@ -32,6 +33,7 @@
     <Content Include="wwwroot\dist\vendor.css" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
